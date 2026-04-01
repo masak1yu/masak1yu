@@ -70,6 +70,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin master
           git add metrics.contrib.svg metrics.stats.svg metrics.langs.svg || true
           git diff --cached --quiet || git commit -m "chore: update metrics [skip ci]"
           git push
