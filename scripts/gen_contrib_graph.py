@@ -100,7 +100,7 @@ def render_svg(days, output="metrics.contrib.svg"):
         '</defs>',
         f'<rect width="{W}" height="{H}" fill="#282a36" rx="8"/>',
         # title
-        f'<text x="{PAD_L}" y="18" fill="#f8f8f2" font-size="12" font-family="monospace">Contributions (past year) — {USERNAME}</text>',
+        f'<text x="{PAD_L}" y="18" fill="#f8f8f2" font-size="12" font-family="monospace">Contributions (past 6 months) — {USERNAME}</text>',
         # grid lines
         *[
             f'<line x1="{PAD_L}" y1="{PAD_T + gy:.1f}" x2="{W - PAD_R}" y2="{PAD_T + gy:.1f}" stroke="#44475a" stroke-width="0.5"/>'
