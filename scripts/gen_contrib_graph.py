@@ -45,7 +45,8 @@ def fetch_contributions():
         for day in week["contributionDays"]:
             days.append((day["date"], day["contributionCount"]))
     days.sort()
-    return days
+    # 直近6ヶ月分（約26週=182日）のみ使用
+    return days[-182:]
 
 
 def render_svg(days, output="metrics.contrib.svg"):
