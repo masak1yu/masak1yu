@@ -33,6 +33,25 @@ jobs:
               --color-accent: #bd93f9;
             }
 
+      # Profile summary card (isocalendar = contribution graph)
+      - name: Isocalendar metrics
+        uses: lowlighter/metrics@latest
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          filename: metrics.isocalendar.svg
+          base: ""
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
+          config_timezone: Asia/Tokyo
+          extras_css: |
+            :root {
+              --color-background: #282a36;
+              --color-text-primary: #f8f8f2;
+              --color-text-secondary: #6272a4;
+              --color-border-default: #44475a;
+              --color-accent: #bd93f9;
+            }
+
       # Top languages card
       - name: Languages metrics
         uses: lowlighter/metrics@latest
@@ -48,25 +67,6 @@ jobs:
           plugin_languages_recent_categories: markup, programming
           plugin_languages_sections: most-used
           plugin_languages_indepth: yes
-          config_timezone: Asia/Tokyo
-          extras_css: |
-            :root {
-              --color-background: #282a36;
-              --color-text-primary: #f8f8f2;
-              --color-text-secondary: #6272a4;
-              --color-border-default: #44475a;
-              --color-accent: #bd93f9;
-            }
-
-      # Profile summary card (isocalendar = contribution graph)
-      - name: Isocalendar metrics
-        uses: lowlighter/metrics@latest
-        with:
-          token: ${{ secrets.METRICS_TOKEN }}
-          filename: metrics.isocalendar.svg
-          base: ""
-          plugin_isocalendar: yes
-          plugin_isocalendar_duration: full-year
           config_timezone: Asia/Tokyo
           extras_css: |
             :root {
