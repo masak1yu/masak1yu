@@ -13,6 +13,16 @@ jobs:
     permissions:
       contents: write
     steps:
+      # Contribution history area chart (daily trend)
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate contribution graph
+        env:
+          METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
+          GITHUB_ACTOR: masak1yu
+        run: python3 scripts/gen_contrib_graph.py
+
       # Stats card (commits, PRs, issues, stars)
       - name: Stats metrics
         uses: lowlighter/metrics@latest
@@ -24,25 +34,6 @@ jobs:
           plugin_habits_facts: yes
           config_timezone: Asia/Tokyo
           config_display: large
-          extras_css: |
-            :root {
-              --color-background: #282a36;
-              --color-text-primary: #f8f8f2;
-              --color-text-secondary: #6272a4;
-              --color-border-default: #44475a;
-              --color-accent: #bd93f9;
-            }
-
-      # Profile summary card (isocalendar = contribution graph)
-      - name: Isocalendar metrics
-        uses: lowlighter/metrics@latest
-        with:
-          token: ${{ secrets.METRICS_TOKEN }}
-          filename: metrics.isocalendar.svg
-          base: ""
-          plugin_isocalendar: yes
-          plugin_isocalendar_duration: full-year
-          config_timezone: Asia/Tokyo
           extras_css: |
             :root {
               --color-background: #282a36;
@@ -76,3 +67,11 @@ jobs:
               --color-border-default: #44475a;
               --color-accent: #bd93f9;
             }
+
+      - name: Commit generated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add metrics.contrib.svg metrics.stats.svg metrics.langs.svg || true
+          git diff --cached --quiet || git commit -m "chore: update metrics [skip ci]"
+          git push

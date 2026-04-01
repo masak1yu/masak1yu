@@ -4,7 +4,7 @@
 ](https://github.com/masak1yu)
 
 
-![](metrics.isocalendar.svg)
+![](metrics.contrib.svg)
 
 <p>
 <a href="https://github.com/masak1yu">
