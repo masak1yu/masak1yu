@@ -11,22 +11,23 @@ jobs:
     permissions:
       contents: write
     steps:
-      # Contribution history area chart (daily trend)
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Contribution history area chart (daily trend)
       - name: Generate contribution graph
         env:
           METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
           GITHUB_ACTOR: masak1yu
         run: python3 scripts/gen_contrib_graph.py
 
-      # Stats card (commits, PRs, issues, stars)
+      # Stats card — output_action: none で自動コミットしない
       - name: Stats metrics
         uses: lowlighter/metrics@latest
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           filename: metrics.stats.svg
+          output_action: none
           base: header, activity, community, repositories
           plugin_habits: yes
           plugin_habits_facts: yes
@@ -41,12 +42,13 @@ jobs:
               --color-accent: #bd93f9;
             }
 
-      # Top languages card
+      # Top languages card — output_action: none で自動コミットしない
       - name: Languages metrics
         uses: lowlighter/metrics@latest
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           filename: metrics.langs.svg
+          output_action: none
           base: ""
           plugin_languages: yes
           plugin_languages_analysis_timeout: 15
@@ -66,11 +68,11 @@ jobs:
               --color-accent: #bd93f9;
             }
 
+      # 全SVGを1回だけコミット&プッシュ
       - name: Commit generated files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin master
-          git add metrics.contrib.svg metrics.stats.svg metrics.langs.svg || true
+          git add metrics.contrib.svg metrics.stats.svg metrics.langs.svg
           git diff --cached --quiet || git commit -m "chore: update metrics [skip ci]"
           git push
