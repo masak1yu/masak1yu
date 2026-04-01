@@ -4,13 +4,13 @@
 ](https://github.com/masak1yu)
 
 
-![](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=masak1yu&theme=dracula)
+![](metrics.isocalendar.svg)
 
 <p>
 <a href="https://github.com/masak1yu">
-  <img align="left" height="170px" src="https://github-readme-stats.vercel.app/api?username=masak1yu&count_private=true&show_icons=true&theme=dracula" />
+  <img align="left" height="170px" src="metrics.stats.svg" />
 </a>
 <a href="https://github.com/masak1yu">
-  <img align="left" height="170px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=masak1yu&layout=compact&theme=dracula" />
+  <img align="left" height="170px" src="metrics.langs.svg" />
 </a>
 </p>
